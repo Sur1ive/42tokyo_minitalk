@@ -6,7 +6,7 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:16:21 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/20 23:01:04 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/20 23:14:36 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	parse_byte(int signum)
 {
-	// char	c[24];
+	static char	c[4] = {0};
+	static int	count = 0;
+	int			bit;
 
 	if (signum == SIGUSR1)
-		ft_printf("0");
+		bit = 0;
 	if (signum == SIGUSR2)
-		ft_printf("1");
+		bit = 1;
+	c[count / 8] += pow(2, count % 8);
+	count++;
+
 }
 
 int	main(void)
