@@ -6,21 +6,24 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:16:21 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/20 23:14:36 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/22 00:59:43 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-int	byte_of_utf8(int c)
+static int	byte_of_utf8(unsigned char c)
 {
-	if (c >= 0 || c <= 0x7F)
+	unsigned char first4bit;
+
+	first4bit = (c >> 4) & 0b00001111;
+	if (first4bit <= 0b0111)
 		return (1);
-	else if (c >= 0xC2 || c <= 0xDF)
+	else if (first4bit >= 0b1100 && first4bit <= 0b1101)
 		return (2);
-	else if (c >= 0xE0 || c <= 0xEF)
+	else if (first4bit == 0b1110)
 		return (3);
-	else if (c >= 0xF0 || c <= 0xF4)
+	else if (first4bit == 0b1111)
 		return (4);
 	else
 	{
@@ -29,33 +32,35 @@ int	byte_of_utf8(int c)
 	}
 }
 
-int	is_end_of_msg(int c)
+static int	is_end_of_msg(int byte_of_c, unsigned char *c)
 {
-	if (c == -1)
-		return (1);
-	else
-		return (0);
+	if (byte_of_c == 4)
+		if (c[0] == 0xFF || c[1] == 0xFF || c[2] == 0xFF || c[3] == 0xFF)
+			return (1);
+	return (0);
 }
 
-void	parse_byte(int signum)
+static void	parse_byte(int signum)
 {
-	static char	c[4] = {0};
+	static unsigned char	c[4] = {0};
 	static int	count = 0;
 	static int	byte_of_c = 1;
 	int			bit;
 
-	if (count == 8)
-		byte_of_c = byte_of_utf8(c[0]);
-
 	if (signum == SIGUSR1)
 		bit = 0;
-	if (signum == SIGUSR2)
+	else if (signum == SIGUSR2)
 		bit = 1;
-	c[count / 8] = c[count / 8] >> 1 + bit * 0b10000000;
+	if (bit == 0)
+		c[count / 8] = (c[count / 8] >> 1) & 0b01111111;
+	else if (bit == 1)
+		c[count / 8] = (c[count / 8] >> 1) | 0b10000000;
 	count++;
+	if (count == 8)
+		byte_of_c = byte_of_utf8(c[0]);
 	if (count == byte_of_c * 8)
 	{
-		if (*(int *)c == END_OF_MSG)
+		if (is_end_of_msg(byte_of_c, c))
 			ft_printf("\n");
 		else
 			write(1, c, byte_of_c);

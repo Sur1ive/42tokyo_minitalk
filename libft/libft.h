@@ -22,6 +22,10 @@
 #  define BUFFER_SIZE 1000
 # endif
 
+# ifndef SIZE_MAX
+#  define SIZE_MAX 4294967295U
+# endif
+
 typedef struct s_list
 {
 	void			*content;

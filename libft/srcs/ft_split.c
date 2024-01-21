@@ -77,7 +77,6 @@ char	**ft_split(char const *s, char c)
 	char	**splited;
 	int		num_of_words;
 	int		i;
-	int		j;
 
 	if (s == NULL)
 		return (NULL);
@@ -87,7 +86,6 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	ft_split_sub(splited, (char *)s, c);
 	i = 0;
-	j = 0;
 	while (i < num_of_words)
 	{
 		if (splited[i] == NULL)
