@@ -6,7 +6,7 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:02:32 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/27 01:45:34 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/27 01:58:59 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,19 @@ static char	*get_next_msg(char msg[24], char *input)
 	return (input);
 }
 
-static void	deal_signal(int signum)
+static void	deal_signal1(int signum)
+{
+	(void)signum;
+	usleep(200);
+}
+
+
+static void	deal_signal2(int signum)
 {
 	static int	count = 0;
 
-	if (signum == SIGUSR2)
-		ft_printf("package%d received correctly\n", count++);
+	(void)signum;
+	ft_printf("package%d received correctly\n", count++);
 }
 
 int	main(int argc, char **argv)
@@ -127,8 +134,8 @@ int	main(int argc, char **argv)
 		exit_with_msg(0, "There must be 2 arguments: PID and message");
 	serverpid = ft_atoi(argv[1]);
 	clientpid = getpid();
-	signal(SIGUSR1, deal_signal);
-	signal(SIGUSR2, deal_signal);
+	signal(SIGUSR1, deal_signal1);
+	signal(SIGUSR2, deal_signal2);
 	if (serverpid == 0)
 		exit_with_msg(0, "Wrong PID\n");
 	input = argv[2];

@@ -6,7 +6,7 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:16:21 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/27 01:46:41 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/27 01:55:15 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	parse_package(char package[32])
 	int		i;
 	int		kill_flag;
 
+	kill(((int *)package)[0], SIGUSR1);
 	i = 0;
 	checkbyte = 0;
 	while (i < 28)
