@@ -21,6 +21,7 @@ CC		= cc
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 all: $(NAME)
 
