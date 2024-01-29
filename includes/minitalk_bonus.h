@@ -6,7 +6,7 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:39:58 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/29 19:52:35 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/29 21:17:15 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 
 void	exit_with_msg(int exitcode, char *msg);
 int		byte_of_utf8(unsigned char c);
+void	set_signal(void (*f)(int));
 
 #endif

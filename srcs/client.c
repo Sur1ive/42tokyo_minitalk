@@ -6,7 +6,7 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:02:32 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/29 19:41:33 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/29 21:18:09 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ int	main(int argc, char **argv)
 		exit_with_msg(0, "Please enter PID and message correctly.\n");
 	serverpid = ft_atoi(argv[1]);
 	clientpid = getpid();
-	signal(SIGUSR1, deal_signal);
-	signal(SIGUSR2, deal_signal);
+	set_signal(deal_signal);
 	input = argv[2];
 	while (*input)
 	{

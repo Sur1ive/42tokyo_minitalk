@@ -6,7 +6,7 @@
 /*   By: yxu <yxu@student.42tokyo.jp>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:16:21 by yxu               #+#    #+#             */
-/*   Updated: 2024/01/29 19:41:21 by yxu              ###   ########.fr       */
+/*   Updated: 2024/01/29 21:17:35 by yxu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ static void	deal_signal(int signum)
 int	main(void)
 {
 	ft_printf("Server start\nPID: %d\n", getpid());
-	signal(SIGUSR1, deal_signal);
-	signal(SIGUSR2, deal_signal);
+	set_signal(deal_signal);
 	while (1)
 		pause();
 	return (0);
