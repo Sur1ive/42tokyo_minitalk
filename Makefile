@@ -1,11 +1,10 @@
 NAME1	= server
 NAME2	= client
-SRCDIR1	= ./server_srcs/
-SRCDIR2	= ./client_srcs/
-SRCS1	= server.c
-SRCS2	= client.c
-SRCS1	:= $(addprefix $(SRCDIR1), $(SRCS1))
-SRCS2	:= $(addprefix $(SRCDIR2), $(SRCS2))
+SRCDIR	= ./srcs/
+SRCS1	= server.c utilities.c
+SRCS2	= client.c utilities.c
+SRCS1	:= $(addprefix $(SRCDIR), $(SRCS1))
+SRCS2	:= $(addprefix $(SRCDIR), $(SRCS2))
 OBJS1	= $(SRCS1:.c=.o)
 OBJS2	= $(SRCS2:.c=.o)
 LIB		= ./libft/libft.a
