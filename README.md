@@ -13,6 +13,13 @@ I send messages and check if it is correct with 32byte-package like this.</br>
 /*     client PID    6 utf8 char 1char/4B     sum of 28B     */
 ```
 
+## 使い方
+```
+make
+./server
+./client
+```
+
 ## NOTICE 
 42 Project must be written in accordance with the 42 school norm, otherwise the grade is 0:
 * Declarations must be at the beginning of a function
