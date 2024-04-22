@@ -6,7 +6,7 @@ You must create a communication program in the form of a client and a server.
 The communication between your client and your server has to be done only using UNIX signals.
 - You can only use these two signals: SIGUSR1 and SIGUSR2.
 
-I send messages and check if it is correct with 32byte-package like this.</br>
+My program sends messages and check if it is correct with 32byte-package like this. UTF-8 is supported.</br>
 ```
 /*                    32byte-package                         */
 /*  [ PID bytes(4B) | message bytes(24B) | check bytes(4B)]  */
