@@ -15,11 +15,12 @@ I send messages and check if it is correct with 32byte-package like this.</br>
 
 ## How to use
 ```
-'''console A'''
-make
-./server
-'''console B '''
-./client [file descriptor] [message]
+# console A
+$> make
+$> ./server
+
+# console B
+$> ./client [process ID] [message]
 ```
 
 ## NOTICE 
